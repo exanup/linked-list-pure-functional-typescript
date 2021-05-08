@@ -4,17 +4,17 @@ type OutputArray = OutputNode[]
 
 class LLNode {
   value: unknown
-  next: LLNode
+  next: LLNode | null
 
-  constructor(value: unknown, next: LLNode) {
+  constructor(value: unknown, next: LLNode | null) {
     this.value = value
     this.next = next
   }
 }
 
 export class LinkedList {
-  head: LLNode
-  tail: LLNode
+  head: LLNode | null
+  tail: LLNode | null
 
   constructor(arr?: unknown[]) {
     this.head = null
@@ -52,11 +52,11 @@ export class LinkedList {
     return this
   }
 
-  find(value: unknown): LLNode {
+  find(value: unknown): LLNode | null {
     return LinkedList.findR(this.head, value)
   }
 
-  private static findR(node: LLNode, value: unknown): LLNode {
+  private static findR(node: LLNode | null, value: unknown): LLNode | null {
     if (!node) {
       return null
     }
@@ -74,7 +74,7 @@ export class LinkedList {
   }
 
   private static appendAfterEachR(
-    node: LLNode,
+    node: LLNode | null,
     value: unknown,
     after: unknown,
   ): void {
@@ -102,7 +102,7 @@ export class LinkedList {
   }
 
   private deleteFromHeadR(value: unknown): void {
-    if (this.head?.value !== value) {
+    if (!this.head || this.head.value !== value) {
       return
     }
 
@@ -113,15 +113,13 @@ export class LinkedList {
     return this.deleteFromHeadR(value)
   }
 
-  private static deleteRestR(node: LLNode, value: unknown): void {
+  private static deleteRestR(node: LLNode | null, value: unknown): void {
     if (!node) {
       return
     }
 
-    const nextNode = node.next
-
-    if (nextNode?.value !== value) {
-      return LinkedList.deleteRestR(nextNode, value)
+    if (!node.next || node.next.value !== value) {
+      return LinkedList.deleteRestR(node.next, value)
     }
 
     const nextNextNode = node.next.next
@@ -135,7 +133,7 @@ export class LinkedList {
     return LinkedList.toArrayR(this.head, [])
   }
 
-  private static toArrayR(node: LLNode, arr: OutputArray): OutputArray {
+  private static toArrayR(node: LLNode | null, arr: OutputArray): OutputArray {
     if (!node) {
       return arr
     }
