@@ -28,6 +28,13 @@ export const prepend = (value: Readonly<unknown>) => (
   list: TLinkedList,
 ): TLinkedList => ({ head: value, tail: list })
 
+export const append = (value: Readonly<unknown>) => (
+  list: TLinkedList,
+): TLinkedList =>
+  !list
+    ? prepend(value)(list)
+    : { head: list.head, tail: append(value)(list.tail) }
+
 export const toArray = (list: TLinkedList) => toArrayR([])(list)
 
 const toArrayR = (arr: unknown[]) => (list: TLinkedList): unknown[] =>

@@ -35,15 +35,19 @@ console.log('-----------------------------------------------------------------')
 /**
  * Linked list module demo.
  */
-// let mList = LinkedListModule.create(null)
-let mList = LinkedListModule.create([3, 11, 'Numb', 22, 'Twenty Two', 11])
+let mList = LinkedListModule.create(null)
+// let mList = LinkedListModule.create([3, 11, 'Numb', 22, 'Twenty Two', 11])
 
 pipe(mList)(
   log(LinkedListModule.toArray),
+  LinkedListModule.append(0),
+  log(LinkedListModule.toArray),
   LinkedListModule.prepend(111),
   log(LinkedListModule.toArray),
-  LinkedListModule.prepend(222),
+  LinkedListModule.append(222),
   log(LinkedListModule.toArray),
   LinkedListModule.prepend(333),
+  log(LinkedListModule.toArray),
+  LinkedListModule.append(444),
   log(LinkedListModule.toArray),
 )
