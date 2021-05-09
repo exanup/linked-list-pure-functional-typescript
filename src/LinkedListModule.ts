@@ -22,39 +22,21 @@ export const create = (arr: TMaybeLinkedListArray): TLinkedList =>
 
 const prependMany = ([head, ...tail]: TLinkedListArray) => (
   list: TLinkedList,
-): TLinkedList => {
-  if (!head) return list
-
-  return prependMany(tail)(prepend(head)(list))
-}
+): TLinkedList => (!head ? list : prependMany(tail)(prepend(head)(list)))
 
 export const prepend = (value: Readonly<unknown>) => (
   list: TLinkedList,
-): TLinkedList => {
-  return { head: value, tail: list }
-}
+): TLinkedList => ({ head: value, tail: list })
 
-export const toArray = (list: TLinkedList) => {
-  return toArrayR([])(list)
-}
+export const toArray = (list: TLinkedList) => toArrayR([])(list)
 
-const toArrayR = (arr: unknown[]) => (list: TLinkedList): unknown[] => {
-  if (!list) {
-    return arr
-  }
-
-  return toArrayR([...arr, list.head])(list.tail)
-}
+const toArrayR = (arr: unknown[]) => (list: TLinkedList): unknown[] =>
+  !list ? arr : toArrayR([...arr, list.head])(list.tail)
 
 export const pipe = (arg: any) => (
   ...[hdFn, ...tlFns]: OneOrMoreRO<Function>
-) => {
-  if (!hdFn) {
-    return
-  }
-
-  return tlFns.reduce((lastValue, fn) => fn(lastValue), hdFn(arg))
-}
+) =>
+  !hdFn ? undefined : tlFns.reduce((lastValue, fn) => fn(lastValue), hdFn(arg))
 
 export const log = (fn: Function) => (item: any) => (
   console.log(fn(item)), item
