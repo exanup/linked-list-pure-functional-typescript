@@ -1,0 +1,39 @@
+{
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["google", "./node_modules/sanctuary-style/eslint-es3.json"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "no-sequences": "off",
+    "require-jsdoc": "off",
+    "semi": ["error", "never"],
+    "comma-dangle": ["error", "always-multiline"],
+    "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1,
+        "FunctionDeclaration": { "parameters": "first" },
+        "FunctionExpression": { "parameters": "first" },
+        "CallExpression": { "arguments": "first" },
+        "ArrayExpression": "first",
+        "ObjectExpression": "first",
+        "ignoredNodes": [
+          "CallExpression",
+          "CallExpression > *",
+          "CallExpression > ArrowFunctionExpression ArrowFunctionExpression > *",
+          "CallExpression > FunctionExpression > BlockStatement",
+          "ConditionalExpression",
+          "MemberExpression"
+        ]
+      }
+    ]
+  }
+}

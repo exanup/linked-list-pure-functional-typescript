@@ -3,8 +3,8 @@
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
     /* Basic Options */
-    "target": "es2020",
-    "module": "commonjs",
+    "target": "ESNext",
+    "module": "CommonJS",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
@@ -22,8 +22,8 @@
     "alwaysStrict": true,
 
     /* Additional Checks */
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
