@@ -33,8 +33,7 @@ export const append = (value: Readonly<unknown>) => (
 ): TLinkedList =>
   !list ? prepend(value)(list) : { ...list, tail: append(value)(list.tail) }
 
-export const appendAfter = (
-  value: Readonly<unknown>,
+export const appendAfter = (value: Readonly<unknown>) => (
   before: Readonly<unknown>,
 ) => (list: TLinkedList): TLinkedList => {
   return !list
@@ -42,9 +41,9 @@ export const appendAfter = (
     : before === list.head
     ? {
         ...list,
-        tail: appendAfter(value, before)({ head: value, tail: list.tail }),
+        tail: appendAfter(value)(before)({ head: value, tail: list.tail }),
       }
-    : { ...list, tail: appendAfter(value, before)(list.tail) }
+    : { ...list, tail: appendAfter(value)(before)(list.tail) }
 }
 
 export const deleteItem = (value: Readonly<unknown>) => (

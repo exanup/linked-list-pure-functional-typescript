@@ -35,30 +35,28 @@ console.log('-----------------------------------------------------------------')
 /**
  * Linked list module demo.
  */
-let mList = LinkedListModule.create(null)
-// let mList = LinkedListModule.create([3, 11, 'Numb', 22, 'Twenty Two', 11])
+// const mList = LinkedListModule.create(null)
+const mList = LinkedListModule.create([3, 11, 'Numb', 22, 'Twenty Two', 11])
 
 pipe(mList)(
   log(LinkedListModule.toArray),
+
   LinkedListModule.append(0),
-  // log(LinkedListModule.toArray),
   LinkedListModule.prepend(111),
-  // log(LinkedListModule.toArray),
   LinkedListModule.append(222),
-  // log(LinkedListModule.toArray),
   LinkedListModule.prepend(333),
   LinkedListModule.prepend(333),
-  // log(LinkedListModule.toArray),
   LinkedListModule.append(444),
   LinkedListModule.append(333),
   LinkedListModule.append(333),
   LinkedListModule.append(333),
-  // log(LinkedListModule.toArray),
-  LinkedListModule.appendAfter(999, 333),
-  LinkedListModule.appendAfter(999, 0),
+  LinkedListModule.appendAfter(999)(333),
+  LinkedListModule.appendAfter(999)(0),
   log(LinkedListModule.toArray),
+
   LinkedListModule.deleteItem(333),
   log(LinkedListModule.toArray),
+
   LinkedListModule.deleteItem(999),
   log(LinkedListModule.toArray),
 )
