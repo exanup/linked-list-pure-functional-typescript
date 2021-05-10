@@ -11,8 +11,9 @@
     "start": "nodemon",
     "build": "tsc",
     "start:prod": "node ./build/index.js",
-    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
-    "lint:fix": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --fix"
+    "lint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
+    "lint:fix": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix",
+    "prepare": "husky install"
   },
   "dependencies": {
     "typescript": "^4.2.4"
@@ -22,8 +23,13 @@
     "@typescript-eslint/parser": "^4.22.1",
     "eslint": "^7.26.0",
     "eslint-config-google": "^0.14.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
     "nodemon": "^2.0.7",
     "sanctuary-style": "^4.0.0",
     "ts-node": "^9.1.1"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": "eslint --fix"
   }
 }
