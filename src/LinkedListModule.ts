@@ -37,8 +37,10 @@ export const append = (value: Readonly<unknown>) => (
 
 export const toArray = (list: TLinkedList) => toArrayR([])(list)
 
-const toArrayR = (arr: unknown[]) => (list: TLinkedList): unknown[] =>
-  !list ? arr : toArrayR([...arr, list.head])(list.tail)
+const toArrayR = (arr: TOutputArray) => (list: TLinkedList): TOutputArray =>
+  !list
+    ? arr
+    : toArrayR([...arr, [list.head, list.tail ? '➡️' : '🔴']])(list.tail)
 
 export const pipe = (arg: any) => (
   ...[hdFn, ...tlFns]: OneOrMoreRO<Function>
