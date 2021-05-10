@@ -35,12 +35,30 @@ export const append = (value: Readonly<unknown>) => (
     ? prepend(value)(list)
     : { head: list.head, tail: append(value)(list.tail) }
 
+export const appendAfter = (
+  value: Readonly<unknown>,
+  before: Readonly<unknown>,
+) => (list: TLinkedList): TLinkedList => {
+  return !list
+    ? list
+    : before === list.head
+    ? {
+        ...list,
+        tail: appendAfter(value, before)({ head: value, tail: list.tail }),
+      }
+    : { ...list, tail: appendAfter(value, before)(list.tail) }
+}
+
 export const toArray = (list: TLinkedList) => toArrayR([])(list)
 
 const toArrayR = (arr: TOutputArray) => (list: TLinkedList): TOutputArray =>
   !list
     ? arr
     : toArrayR([...arr, [list.head, list.tail ? '➡️' : '🔴']])(list.tail)
+
+/**
+ * Utilities -------------------------------------------------------------------
+ */
 
 export const pipe = (arg: any) => (
   ...[hdFn, ...tlFns]: OneOrMoreRO<Function>

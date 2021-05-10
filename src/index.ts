@@ -41,13 +41,18 @@ let mList = LinkedListModule.create(null)
 pipe(mList)(
   log(LinkedListModule.toArray),
   LinkedListModule.append(0),
-  log(LinkedListModule.toArray),
+  // log(LinkedListModule.toArray),
   LinkedListModule.prepend(111),
-  log(LinkedListModule.toArray),
+  // log(LinkedListModule.toArray),
   LinkedListModule.append(222),
-  log(LinkedListModule.toArray),
+  // log(LinkedListModule.toArray),
   LinkedListModule.prepend(333),
-  log(LinkedListModule.toArray),
+  LinkedListModule.prepend(333),
+  // log(LinkedListModule.toArray),
   LinkedListModule.append(444),
+  LinkedListModule.append(333),
+  log(LinkedListModule.toArray),
+
+  LinkedListModule.appendAfter(999, 333),
   log(LinkedListModule.toArray),
 )
