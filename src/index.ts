@@ -51,8 +51,14 @@ pipe(mList)(
   // log(LinkedListModule.toArray),
   LinkedListModule.append(444),
   LinkedListModule.append(333),
-  log(LinkedListModule.toArray),
-
+  LinkedListModule.append(333),
+  LinkedListModule.append(333),
+  // log(LinkedListModule.toArray),
   LinkedListModule.appendAfter(999, 333),
+  LinkedListModule.appendAfter(999, 0),
+  log(LinkedListModule.toArray),
+  LinkedListModule.deleteItem(333),
+  log(LinkedListModule.toArray),
+  LinkedListModule.deleteItem(999),
   log(LinkedListModule.toArray),
 )

@@ -47,6 +47,15 @@ export const appendAfter = (
     : { ...list, tail: appendAfter(value, before)(list.tail) }
 }
 
+export const deleteItem = (value: Readonly<unknown>) => (
+  list: TLinkedList,
+): TLinkedList =>
+  !list
+    ? list
+    : value === list.head
+    ? deleteItem(value)(list.tail)
+    : { ...list, tail: deleteItem(value)(list.tail) }
+
 export const toArray = (list: TLinkedList) => toArrayR([])(list)
 
 const toArrayR = (arr: TOutputArray) => (list: TLinkedList): TOutputArray =>
