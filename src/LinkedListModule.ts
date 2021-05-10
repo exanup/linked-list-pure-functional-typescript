@@ -31,9 +31,7 @@ export const prepend = (value: Readonly<unknown>) => (
 export const append = (value: Readonly<unknown>) => (
   list: TLinkedList,
 ): TLinkedList =>
-  !list
-    ? prepend(value)(list)
-    : { head: list.head, tail: append(value)(list.tail) }
+  !list ? prepend(value)(list) : { ...list, tail: append(value)(list.tail) }
 
 export const appendAfter = (
   value: Readonly<unknown>,
@@ -62,8 +60,7 @@ const toArrayR = (arr: TOutputArray) => (list: TLinkedList): TOutputArray =>
 
 export const pipe = (arg: any) => (
   ...[hdFn, ...tlFns]: OneOrMoreRO<Function>
-) =>
-  !hdFn ? undefined : tlFns.reduce((lastValue, fn) => fn(lastValue), hdFn(arg))
+) => tlFns.reduce((lastValue, fn) => fn(lastValue), hdFn(arg))
 
 export const log = (fn: Function) => (item: any) => (
   console.log(fn(item)), item
