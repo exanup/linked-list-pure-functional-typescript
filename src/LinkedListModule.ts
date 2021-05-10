@@ -4,8 +4,7 @@ type TOutputArray = Readonly<TOutputNode[]>
 
 type None = null
 type Maybe<T> = Readonly<T> | None
-type OneOrMore<T> = [T, ...T[]]
-type OneOrMoreRO<T> = Readonly<OneOrMore<T>>
+type OneOrMore<T> = Readonly<[T, ...T[]]>
 
 type Unknown = Readonly<unknown>
 
@@ -24,18 +23,16 @@ const prependMany = ([head, ...tail]: TLinkedListArray) => (
   list: TLinkedList,
 ): TLinkedList => (!head ? list : prependMany(tail)(prepend(head)(list)))
 
-export const prepend = (value: Readonly<unknown>) => (
+export const prepend = (value: Unknown) => (
   list: TLinkedList,
 ): TLinkedList => ({ head: value, tail: list })
 
-export const append = (value: Readonly<unknown>) => (
-  list: TLinkedList,
-): TLinkedList =>
+export const append = (value: Unknown) => (list: TLinkedList): TLinkedList =>
   !list ? prepend(value)(list) : { ...list, tail: append(value)(list.tail) }
 
-export const appendAfter = (value: Readonly<unknown>) => (
-  before: Readonly<unknown>,
-) => (list: TLinkedList): TLinkedList => {
+export const appendAfter = (value: Unknown) => (before: Unknown) => (
+  list: TLinkedList,
+): TLinkedList => {
   return !list
     ? list
     : before === list.head
@@ -46,7 +43,7 @@ export const appendAfter = (value: Readonly<unknown>) => (
     : { ...list, tail: appendAfter(value)(before)(list.tail) }
 }
 
-export const deleteItem = (value: Readonly<unknown>) => (
+export const deleteItem = (value: Unknown) => (
   list: TLinkedList,
 ): TLinkedList =>
   !list
@@ -66,9 +63,8 @@ const toArrayR = (arr: TOutputArray) => (list: TLinkedList): TOutputArray =>
  * Utilities -------------------------------------------------------------------
  */
 
-export const pipe = (arg: any) => (
-  ...[hdFn, ...tlFns]: OneOrMoreRO<Function>
-) => tlFns.reduce((lastValue, fn) => fn(lastValue), hdFn(arg))
+export const pipe = (arg: any) => (...[hdFn, ...tlFns]: OneOrMore<Function>) =>
+  tlFns.reduce((lastValue, fn) => fn(lastValue), hdFn(arg))
 
 export const log = (fn: Function) => (item: any) => (
   console.log(fn(item)), item
